@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import Alamofire
 import SwiftyJSON
+import ChameleonFramework
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -95,6 +96,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             weatherLabel.text = "\(weatherInfo.weather), today in \(weatherInfo.name)"
             
             weatherImageView.image = UIImage(named: weatherInfo.updateWeatherIcon(condition: weatherInfo.condition))
+            
+            tempLabel.textColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor.flatOrange(), isFlat:true)
+            self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame: self.view.frame, andColors: [UIColor.flatYellow(), UIColor.flatOrange()])
+            
+            weatherImageView.image = weatherImageView.image?.withRenderingMode(.alwaysTemplate)
+            weatherImageView.tintColor = .white
         }
     }
 }

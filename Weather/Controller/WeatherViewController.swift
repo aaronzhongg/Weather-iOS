@@ -24,6 +24,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempMinLabel: UILabel!
     @IBOutlet weak var tempMaxLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var weatherImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                     newWeatherInfo.tempMin = weatherData["main"]["temp_min"].intValue
                     newWeatherInfo.tempMax = weatherData["main"]["temp_max"].intValue
                     newWeatherInfo.weather = weatherData["weather"][0]["main"].stringValue
+                    newWeatherInfo.condition = weatherData["weather"][0]["id"].intValue
                     
                     self.weather = newWeatherInfo
                     
@@ -91,6 +93,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             tempMinLabel.text = "\(weatherInfo.tempMin)°"
             tempMaxLabel.text = "\(weatherInfo.tempMax)°"
             weatherLabel.text = "\(weatherInfo.weather), today in \(weatherInfo.name)"
+            
+            weatherImageView.image = UIImage(named: weatherInfo.updateWeatherIcon(condition: weatherInfo.condition))
         }
     }
 }

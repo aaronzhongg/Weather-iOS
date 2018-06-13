@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yZX-Mz-xXw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sunny" translatesAutoresizingMaskIntoConstraints="NO" id="yZX-Mz-xXw">
                                 <rect key="frame" x="87" y="127" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -58,6 +58,7 @@
                         <outlet property="tempLabel" destination="bSM-aI-yGZ" id="LNO-aA-OhJ"/>
                         <outlet property="tempMaxLabel" destination="YqS-za-ATu" id="8g0-BS-OnX"/>
                         <outlet property="tempMinLabel" destination="rb2-IR-WUh" id="9e3-XH-ci2"/>
+                        <outlet property="weatherImageView" destination="yZX-Mz-xXw" id="CdF-iW-Ta8"/>
                         <outlet property="weatherLabel" destination="h2U-M5-ANp" id="Sl8-wq-GiF"/>
                     </connections>
                 </viewController>
@@ -66,4 +67,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="sunny" width="64" height="64"/>
+    </resources>
 </document>

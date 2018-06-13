@@ -51,8 +51,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             locationManager.delegate = nil
             
-            let params: [String: String] = ["lon": String(location.coordinate.longitude), "lat": String(location.coordinate.latitude), "appid": APP_ID, "units": "metric" ]
-            
+//            let params: [String: String] = ["lon": String(location.coordinate.longitude), "lat": String(location.coordinate.latitude), "appid": APP_ID, "units": "metric" ]
+            let params: [String: String] = ["q": "Auckland" ,"appid": APP_ID, "units": "metric" ]
             getCurrentWeatherData(with: params)
         }
     }
@@ -89,6 +89,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - Update view
     
     func updateView() {
+        
+        // sunny: flatYellow(), flatOrange()
+        // light_rain, shower: flatBlue(), flatNavyBlue()
+        // snow4, snow5, overcast, fog: flatWhite, flatGray()
+        // cloudy2: flatSkyBly(), flatWhite()
+        // tstorm1, tstorm3: flatNavyBlue(), flatBlueColorDark()
+        
         if let weatherInfo = self.weather {
             tempLabel.text = "\(weatherInfo.temp)°"
             tempMinLabel.text = "\(weatherInfo.tempMin)°"
@@ -97,11 +104,17 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             
             weatherImageView.image = UIImage(named: weatherInfo.updateWeatherIcon(condition: weatherInfo.condition))
             
-            tempLabel.textColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor.flatOrange(), isFlat:true)
-            self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame: self.view.frame, andColors: [UIColor.flatYellow(), UIColor.flatOrange()])
+            let bgColour = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame: self.view.frame, andColors: weatherInfo.updateBackgroundColor(condition: weatherInfo.condition))
+            let contrastColour = UIColor(contrastingBlackOrWhiteColorOn: bgColour, isFlat:true)
+            
+            tempLabel.textColor = contrastColour
+            tempMinLabel.textColor = contrastColour
+            tempMaxLabel.textColor = contrastColour
+            weatherLabel.textColor = contrastColour
+            self.view.backgroundColor = bgColour
             
             weatherImageView.image = weatherImageView.image?.withRenderingMode(.alwaysTemplate)
-            weatherImageView.tintColor = .white
+            weatherImageView.tintColor = contrastColour
         }
     }
 }

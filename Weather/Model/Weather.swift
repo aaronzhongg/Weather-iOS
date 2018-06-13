@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import ChameleonFramework
 
 class Weather {
     var name: String = ""
@@ -57,6 +59,23 @@ class Weather {
             return "dunno"
         }
         
+    }
+    
+    func updateBackgroundColor(condition: Int) -> [UIColor] {
+        switch (condition) {
+        case 0...300, 900...903, 905...1000:
+            return [UIColor.flatNavyBlue(), UIColor.flatBlueColorDark()]
+        case 301...500, 501...600:
+            return [UIColor.flatBlue(), UIColor.flatNavyBlue()]
+        case 601...700, 903, 701...771:
+            return [UIColor.flatWhite(), UIColor.flatGray()]
+        case 801...804 :
+            return [UIColor.flatSkyBlue(), UIColor.flatWhite()]
+        case 904 :
+            return [UIColor.flatYellow(), UIColor.flatOrange()]
+        default :
+            return [UIColor.flatSkyBlue(), UIColor.flatBlueColorDark()]
+        }
     }
     
 }

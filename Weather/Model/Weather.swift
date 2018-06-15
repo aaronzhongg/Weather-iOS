@@ -17,6 +17,7 @@ class Weather {
     var temp: Int = 0
     var weather: String = ""
     var condition: Int = 0
+    var date: Date?
     
     func updateWeatherIcon(condition: Int) -> String {
         

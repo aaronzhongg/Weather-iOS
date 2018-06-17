@@ -25,7 +25,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     
     var contrastColour: UIColor?
     
-    var stringArray = ["21°", "22°", "21°", "19°", "14°", "13°", "12°"]
+    var refreshControl = UIRefreshControl()
     
     @IBOutlet weak var weatherForecastCollectionView: UICollectionView!
     @IBOutlet weak var tempLabel: UILabel!
@@ -33,6 +33,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     @IBOutlet weak var tempMaxLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,19 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         
         weatherForecastCollectionView.register(UINib(nibName: "WeatherForecastCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WeatherForecastCell")
         
+        scrollView.isScrollEnabled = true
+        scrollView.alwaysBounceVertical = true
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        scrollView.addSubview(refreshControl)
+    }
+    
+    @objc func refresh() {
+        weather = nil
+        weatherForecast = [Weather]()
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        refreshControl.endRefreshing()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +75,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         let location = locations.last!
         
         if location.horizontalAccuracy > 0 {
+            print("FOUND LOCATION")
             locationManager.stopUpdatingLocation()
             locationManager.delegate = nil
             
@@ -104,7 +119,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
                 do {
                     let weatherData = try JSON(data: responseData)
                     
-                    print(weatherData)
                     // Take up to 10 entries
                     
                     for index in 0...10 {

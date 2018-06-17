@@ -75,7 +75,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         let location = locations.last!
         
         if location.horizontalAccuracy > 0 {
-            print("FOUND LOCATION")
             locationManager.stopUpdatingLocation()
             locationManager.delegate = nil
             

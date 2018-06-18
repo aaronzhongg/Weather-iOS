@@ -10,25 +10,31 @@ import UIKit
 
 class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    lazy var myViewControllers: [UIViewController] = {
-        return [self.loadVC(viewControllerIdentifier: "WeatherViewController"), self.loadVC(viewControllerIdentifier: "CityViewController")]
-    }()
+    var myVCs = [UIViewController]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         dataSource = self
-
-        if let firstViewController = myViewControllers.first {
+        
+        let weatherVC = storyboard?.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+        
+        let cityVC = storyboard?.instantiateViewController(withIdentifier: "CityViewController") as! CityViewController
+        
+        weatherVC.bgColourDelegate = cityVC
+        
+        myVCs.append(weatherVC)
+        
+        myVCs.append(cityVC)
+        
+        if let firstViewController = myVCs.first {
             setViewControllers([firstViewController],
                                direction: .forward,
                                animated: true,
                                completion: nil)
         }
-    }
-    
-    func loadVC(viewControllerIdentifier: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewControllerIdentifier)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,7 +45,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     // MARK: - Page View Data Source
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = myViewControllers.index(of: viewController) else {
+        guard let viewControllerIndex = myVCs.index(of: viewController) else {
             return nil
         }
         let previousIndex = viewControllerIndex - 1
@@ -48,21 +54,21 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
             return nil
         }
         
-        return myViewControllers[previousIndex]
+        return myVCs[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = myViewControllers.index(of: viewController) else {
+        guard let viewControllerIndex = myVCs.index(of: viewController) else {
             return nil
         }
         
         let nextIndex = viewControllerIndex + 1
         
-        guard nextIndex < myViewControllers.count else {
+        guard nextIndex < myVCs.count else {
             return nil
         }
         
-        return myViewControllers[nextIndex]
+        return myVCs[nextIndex]
     }
     
 

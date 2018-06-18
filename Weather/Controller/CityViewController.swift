@@ -12,7 +12,11 @@ class CityViewController: UIViewController {
     
     var cities = [String]()
     
+    var contrastColour: UIColor?
+    var backgroundColour: UIColor?
+    
     @IBOutlet weak var cityTableView: UITableView!
+    @IBOutlet weak var addCityButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +56,18 @@ class CityViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func updateView() {
+        if let bgColour = backgroundColour {
+            view.backgroundColor = bgColour
+        }
+        
+        if let textColour = contrastColour {
+            addCityButton.tintColor = textColour
+            cityTableView.reloadData()
+        }
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -74,9 +90,20 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.textLabel?.text = cities[indexPath.row]
         
+        if let textColour = contrastColour {
+            cell.textLabel?.textColor = textColour
+        }
+        
         return cell
     }
-    
-    
-    
+}
+
+extension CityViewController: BackgroundColourDelegate {
+    func bgColourChanged(bgColour: UIColor, contrastColour: UIColor) {
+        print("bgColourChanged called")
+        self.backgroundColour = bgColour
+        self.contrastColour = contrastColour
+        
+        updateView()
+    }
 }

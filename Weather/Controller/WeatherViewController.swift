@@ -12,6 +12,10 @@ import Alamofire
 import SwiftyJSON
 import ChameleonFramework
 
+protocol BackgroundColourDelegate {
+    func bgColourChanged(bgColour: UIColor, contrastColour: UIColor)
+}
+
 class WeatherViewController: UIViewController, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     let WEATHER_API_URL = "http://api.openweathermap.org/data/2.5/weather"
@@ -19,13 +23,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     let APP_ID = "22252b5384b9eb32db93dfd00bb03a0c"
     
     let locationManager = CLLocationManager()
+    var refreshControl = UIRefreshControl()
     
     var weather: Weather?
     var weatherForecast = [Weather]()
     
     var contrastColour: UIColor?
     
-    var refreshControl = UIRefreshControl()
+    var bgColourDelegate: BackgroundColourDelegate?
     
     @IBOutlet weak var weatherForecastCollectionView: UICollectionView!
     @IBOutlet weak var tempLabel: UILabel!
@@ -157,6 +162,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
             
             let bgColour = UIColor(gradientStyle:UIGradientStyle.topToBottom, withFrame: self.view.frame, andColors: weatherInfo.updateBackgroundColor(condition: weatherInfo.condition))
             contrastColour = UIColor(contrastingBlackOrWhiteColorOn: bgColour, isFlat:true)
+            
+            bgColourDelegate?.bgColourChanged(bgColour: bgColour!, contrastColour: contrastColour!)
             
             tempLabel.textColor = contrastColour
             tempMinLabel.textColor = contrastColour

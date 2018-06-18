@@ -17,3 +17,4 @@ A minimalist weather app
 - Chameleon Framework for colouring
 - SwipeCellKit for swipe to delete
 - First time using UIPageViewController & UICollectionView
+- UserDefaults to hold persist cities

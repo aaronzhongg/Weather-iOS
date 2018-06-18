@@ -8,5 +8,6 @@ target 'Weather' do
 pod 'Alamofire'
 pod 'SwiftyJSON'
 pod 'ChameleonFramework'
+pod 'SwipeCellKit'
 
 end

@@ -4,23 +4,27 @@ PODS:
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
   - SwiftyJSON (4.1.0)
+  - SwipeCellKit (2.4.1)
 
 DEPENDENCIES:
   - Alamofire
   - ChameleonFramework
   - SwiftyJSON
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - ChameleonFramework
     - SwiftyJSON
+    - SwipeCellKit
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  SwipeCellKit: 189dab685734056ce3c803842759b73b8d6aa65f
 
-PODFILE CHECKSUM: d462a6921c9e1041b35b6589fc3870753c24760e
+PODFILE CHECKSUM: 5a38021782927c1ef1594bf9ee85d08ab0cc78fe
 
 COCOAPODS: 1.5.3

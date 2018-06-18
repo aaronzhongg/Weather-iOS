@@ -22,6 +22,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         let cityVC = storyboard?.instantiateViewController(withIdentifier: "CityViewController") as! CityViewController
         
         weatherVC.bgColourDelegate = cityVC
+        cityVC.cityChangedDelegate = weatherVC
         
         myVCs.append(weatherVC)
         

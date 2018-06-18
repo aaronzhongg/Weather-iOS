@@ -28,7 +28,11 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     var weather: Weather?
     var weatherForecast = [Weather]()
     
-    var contrastColour: UIColor?
+    var contrastColour: UIColor? {
+        didSet {
+            weatherForecastCollectionView.reloadData()
+        }
+    }
     
     var bgColourDelegate: BackgroundColourDelegate?
     
@@ -62,11 +66,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
     
     @objc func refresh() {
-        weather = nil
-        weatherForecast = [Weather]()
+        resetData()
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         refreshControl.endRefreshing()
+    }
+    
+    func resetData() {
+        weather = nil
+        weatherForecast = [Weather]()
     }
 
     override func didReceiveMemoryWarning() {
@@ -195,7 +203,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
         
         // Set colour
         cell.tempLabel.textColor = contrastColour
-        cell.weatherImageView.image = weatherImageView.image?.withRenderingMode(.alwaysTemplate)
+        cell.weatherImageView.image = cell.weatherImageView.image?.withRenderingMode(.alwaysTemplate)
         cell.weatherImageView.tintColor = contrastColour
         cell.dateTimeLabel.textColor = contrastColour
         
@@ -209,5 +217,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, UIColl
     }
 
     
+}
+
+extension WeatherViewController: CityChangedDelegate {
+    func cityChanged(cityName: String) {
+        let params: [String: String] = ["q": cityName, "appid": APP_ID, "units": "metric" ]
+        resetData()
+        getCurrentWeatherData(with: params)
+        getWeatherForecast(with: params)
+    }
 }
 

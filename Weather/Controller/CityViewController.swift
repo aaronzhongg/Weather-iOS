@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CityChangedDelegate {
+    func cityChanged(cityName: String)
+}
+
 class CityViewController: UIViewController {
     
     var cities = [String]()
@@ -17,6 +21,8 @@ class CityViewController: UIViewController {
     
     @IBOutlet weak var cityTableView: UITableView!
     @IBOutlet weak var addCityButton: UIButton!
+    
+    var cityChangedDelegate: CityChangedDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +86,8 @@ class CityViewController: UIViewController {
 
 }
 
+// MARK: - Table View Delegate / Datasource
+
 extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
@@ -94,9 +102,20 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.textColor = textColour
         }
         
+        let bgView = UIView()
+        bgView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = bgView
+        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cityChangedDelegate?.cityChanged(cityName: cities[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
+
+// MARK: - BackgroundColour Delegate
 
 extension CityViewController: BackgroundColourDelegate {
     func bgColourChanged(bgColour: UIColor, contrastColour: UIColor) {

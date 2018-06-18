@@ -24,6 +24,8 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         weatherVC.bgColourDelegate = cityVC
         cityVC.cityChangedDelegate = weatherVC
         
+        cityVC.parentPageVC = self
+        
         myVCs.append(weatherVC)
         
         myVCs.append(cityVC)

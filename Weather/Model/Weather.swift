@@ -72,7 +72,7 @@ class Weather {
             return [UIColor.flatWhite(), UIColor.flatGray()]
         case 801...804 :
             return [UIColor.flatSkyBlue(), UIColor.flatWhite()]
-        case 904 :
+        case 800, 904 :
             return [UIColor.flatYellow(), UIColor.flatOrange()]
         default :
             return [UIColor.flatSkyBlue(), UIColor.flatBlueColorDark()]

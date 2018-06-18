@@ -23,6 +23,7 @@ class CityViewController: UIViewController {
     @IBOutlet weak var addCityButton: UIButton!
     
     var cityChangedDelegate: CityChangedDelegate?
+    var parentPageVC: PageViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +113,11 @@ extension CityViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cityChangedDelegate?.cityChanged(cityName: cities[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        parentPageVC?.setViewControllers([(parentPageVC?.myVCs.first)!],
+                           direction: .reverse,
+                           animated: true,
+                           completion: nil)
     }
 }
 

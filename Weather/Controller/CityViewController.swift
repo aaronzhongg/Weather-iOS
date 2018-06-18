@@ -14,6 +14,7 @@ protocol CityChangedDelegate {
 
 class CityViewController: UIViewController {
     
+    var userDefaults = UserDefaults.standard
     var cities = [String]()
     
     var contrastColour: UIColor?
@@ -33,6 +34,10 @@ class CityViewController: UIViewController {
         
         cityTableView.separatorStyle = .none
         cityTableView.rowHeight = 55
+        
+        if let cityItems = userDefaults.array(forKey: "cities") as? [String] {
+            cities = cityItems
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,6 +58,8 @@ class CityViewController: UIViewController {
             // Add New City
             if let newCity = textField?.text {
                 self.cities.append(newCity)
+                
+                self.userDefaults.set(self.cities, forKey: "cities")
                 
                 self.cityTableView.reloadData()
             }

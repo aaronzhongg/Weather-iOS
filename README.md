@@ -7,7 +7,7 @@ A minimalist weather app
 - Add new cities and find weather info
 - Background changes based on weather
 
-<img src="https://media.giphy.com/media/8rEkhEyxSWxxb2opnw/giphy.gif" width=350>
+<img src="https://media.giphy.com/media/1dOJaSz4ONFTfV8dZv/giphy.gif" width=350>
 
 <h4> Technologies and Frameworks </h4>
 
@@ -15,4 +15,5 @@ A minimalist weather app
 - SwiftyJSON for parsing json data
 - Openweathermap API for weather data
 - Chameleon Framework for colouring
+- SwipeCellKit for swipe to delete
 - First time using UIPageViewController & UICollectionView

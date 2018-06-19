@@ -1,13 +1,14 @@
 # Weather-iOS
 
 A minimalist weather app 
+
 - Find current locations weather and forecast
 - Swipe down to refresh
 - Swipe right to left to find list of Cities
 - Add new cities and find weather info
 - Background changes based on weather
 
-<img src="https://media.giphy.com/media/5torCo4Dns1y2hxbES/giphy.gif" width=350>
+<img src="https://media.giphy.com/media/3kHDlGYQ1LGoidTbsV/giphy.gif" width="350">
 
 <h4> Technologies and Frameworks </h4>
 

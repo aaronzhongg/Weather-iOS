@@ -8,7 +8,7 @@ A minimalist weather app
 - Add new cities and find weather info
 - Background changes based on weather
 
-<img src="https://media.giphy.com/media/3kHDlGYQ1LGoidTbsV/giphy.gif" width="350">
+<img href="https://media.giphy.com/media/fGCfsclieOIjiOidhI/giphy.gif" src="https://media.giphy.com/media/fGCfsclieOIjiOidhI/giphy.gif" width="350">
 
 <h4> Technologies and Frameworks </h4>
 

@@ -8,7 +8,7 @@ A minimalist weather app
 - Add new cities and find weather info
 - Background changes based on weather
 
-<img src="https://media.giphy.com/media/3gMaHDAaHPyJqwoKQF/giphy.gif" width="350">
+<img src="./Weather-iOS.gif" alt="Weather App Demo" height="600">
 
 <h4> Technologies and Frameworks </h4>
 
